@@ -37,11 +37,11 @@ const ToDoList = ({ BtnComponent, items, setItems }) => {
     }
   }
 
+  // ---------------- Set todo is completed function ----------------
   const setTaskIsCompleted = (id) => {
     const newArray = items.map((todo) => {
       if (todo.id === id) {
         todo.isCompleted = todo.isCompleted === true ? false : true;
-        console.log(todo);
         return todo;
       } else {
         return todo;
