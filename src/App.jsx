@@ -5,8 +5,7 @@ import ToDoList from "./components/ToDoList";
 function App() {
   return (
     <>
-      <Header BtnComponent={Button} />
-      <ToDoList BtnComponent={Button} />
+      <Header BtnComponent={Button} ToDoList={ToDoList} />
     </>
   );
 }

@@ -1,7 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+const dataFronmLocal = JSON.parse(localStorage.getItem("items"));
 
-const Header = ({ BtnComponent }) => {
-  const [item, setTask] = useState("");
+const Header = ({ BtnComponent, ToDoList }) => {
+  const [items, setItems] = useState(dataFronmLocal || []);
+  const [item, setItem] = useState("");
+
+  // storing the items into local storage each time there us changes in items
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
+
+  const addItem = () => {
+    if (item) {
+      const newItem = {
+        id: Date.now(),
+        item: item,
+        isEditing: false,
+        isCompleted: false,
+      };
+      setItems([...items, newItem]);
+    } else {
+      alert("Enter your TODO");
+    }
+    setItem("");
+  };
 
   return (
     <>
@@ -14,13 +36,20 @@ const Header = ({ BtnComponent }) => {
             type="text"
             placeholder="Enter task"
             className="border border-purple-700 outline-none w-4/5 px-4 py-4 rounded-md text-lg focus:shadow-md focus:shadow-purple-700 focus:border-none"
-            onChange={(e) => setTask(e.target.value)}
+            value={item}
+            onChange={(e) => setItem(e.target.value)}
           />
           <BtnComponent
             btnName="Add Task"
             style="px-4 py-4 border border-gray-600 min-w-28 rounded-md text-lg bg-purple-600 font-bold text-white cursor-pointer hover:bg-purple-700 duration-200"
+            Operation={addItem}
           />
         </section>
+        <ToDoList
+          BtnComponent={BtnComponent}
+          items={items}
+          setItems={setItems}
+        />
       </header>
     </>
   );
