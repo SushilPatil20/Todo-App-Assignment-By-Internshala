@@ -5,7 +5,7 @@ const Header = ({ BtnComponent, ToDoList }) => {
   const [items, setItems] = useState(dataFronmLocal || []);
   const [item, setItem] = useState("");
 
-  // storing the items into local storage each time there us changes in items
+  // ------ storing the items into local storage each time there us changes in items ------
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items));
   }, [items]);
