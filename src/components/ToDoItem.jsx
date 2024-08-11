@@ -41,14 +41,13 @@ const ToDoItem = ({
               }
             />
           )}
-          {item.isEditing ? null : (
+          {item.isEditing ? null : item.isCompleted ? null : (
             <BtnComponent
               btnName="Delete"
               style="text-sm border-none px-4 py-1 rounded bg-red-600 hover:bg-red-700 text-white font-bold duration-200"
               Operation={() => deleteToDo(id)}
             />
           )}
-          {console.log(item)}
           {item.isEditing ? null : (
             <input
               type="checkbox"
